@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Table</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: aqua;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        background: white;
+        transition: background-color 0.3s ease; 
+    }
+    th {
+        background-color: #ff0000;
+        color: #ddd;
+    }
+    th:hover, td:hover {
+        background-color: lightblue; 
+    }
+    .hidden {
+        display: none;
+    }
+    button {
+        padding: 10px 20px;
+        margin: 5px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+    @media screen and (max-width: 600px) {
+        table {
+            width: 100%;
+        }
+        td, th {
+            display: block;
+        }
+        td:nth-of-type(-n+7), th:nth-of-type(-n+7) {
+            display: table-cell;
+        }
+    }
+</style>
+
+</head>
+<body>
+
+<table>
+    <thead>
+        <tr>
+            <th>Column 1 <button class="remove-btn" onclick="removeColumn(1)">✖</button></th>
+            <th>Column 2 <button class="remove-btn" onclick="removeColumn(2)">✖</button></th>
+            <th>Column 3 <button class="remove-btn" onclick="removeColumn(3)">✖</button></th>
+            <th>Column 4 <button class="remove-btn" onclick="removeColumn(4)">✖</button></th>
+            <th>Column 5 <button class="remove-btn" onclick="removeColumn(5)">✖</button></th>
+            <th>Column 6 <button class="remove-btn" onclick="removeColumn(6)">✖</button></th>
+            <th>Column 7 <button class="remove-btn" onclick="removeColumn(7)">✖</button></th>
+            <th class="hidden">Column 8 <button class="remove-btn" onclick="removeColumn(8)">✖</button></th>
+            <th class="hidden">Column 9 <button class="remove-btn" onclick="removeColumn(9)">✖</button></th>
+            <th class="hidden">Column 10 <button class="remove-btn" onclick="removeColumn(10)">✖</button></th>
+            <th class="hidden">Column 11 <button class="remove-btn" onclick="removeColumn(11)">✖</button></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+            <td>Data 7</td>
+            <td class="hidden">Data 8</td>
+            <td class="hidden">Data 9</td>
+            <td class="hidden">Data 10</td>
+            <td class="hidden">Data 11</td>
+        </tr>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+            <td>Data 7</td>
+            <td class="hidden">Data 8</td>
+            <td class="hidden">Data 9</td>
+            <td class="hidden">Data 10</td>
+            <td class="hidden">Data 11</td>
+        </tr>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+            <td>Data 7</td>
+            <td class="hidden">Data 8</td>
+            <td class="hidden">Data 9</td>
+            <td class="hidden">Data 10</td>
+            <td class="hidden">Data 11</td>
+        </tr>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+            <td>Data 7</td>
+            <td class="hidden">Data 8</td>
+            <td class="hidden">Data 9</td>
+            <td class="hidden">Data 10</td>
+            <td class="hidden">Data 11</td>
+        </tr>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+            <td>Data 7</td>
+            <td class="hidden">Data 8</td>
+            <td class="hidden">Data 9</td>
+            <td class="hidden">Data 10</td>
+            <td class="hidden">Data 11</td>
+        </tr>
+    </tbody>
+</table>
+
+<button onclick="showColumn(8)">Show Column 8</button>
+<button onclick="showColumn(9)">Show Column 9</button>
+<button onclick="showColumn(10)">Show Column 10</button>
+<button onclick="showColumn(11)">Show Column 11</button>
+<script>
+    function showColumn(columnIndex) {
+        var columnToShow = document.querySelectorAll('th.hidden:nth-child(' + columnIndex + '), td.hidden:nth-child(' + columnIndex + ')');
+        columnToShow.forEach(function(column) {
+            column.classList.remove('hidden');
+        });
+        var buttonToHide = document.querySelector('button:nth-of-type(' + (columnIndex - 6) + ')');
+        buttonToHide.classList.add('hidden-btn');
+    }
+
+    function toggleColumn(columnIndex) {
+        var columnToToggle = document.querySelectorAll('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+        columnToToggle.forEach(function(column) {
+            column.classList.toggle('hidden');
+        });
+    }
+
+    function removeColumn(columnIndex) {
+        var columnToRemove = document.querySelectorAll('th:nth-child(' + columnIndex + '), td:nth-child(' + columnIndex + ')');
+        columnToRemove.forEach(function(column) {
+            column.classList.add('hidden');
+        });
+        var nextHiddenColumns = document.querySelectorAll('.hidden');
+        nextHiddenColumns.forEach(function(column) {
+            if (column.cellIndex >= columnIndex) {
+                column.cellIndex--;
+            }
+        });
+    }
+</script>
+</body>
+</html>
